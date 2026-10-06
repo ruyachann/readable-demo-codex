@@ -233,3 +233,7 @@ Codex固有/既存transport/配布/Web/M14連携の173件は通過、実AI0・�
 
 ### Codex専用clone移行完了
 移行commit 13cdfccbda77633bb194def60543a0d460d61f4f をorigin/mainへpushしremote一致確認済み。cloneはCodex既定、618 passed / 59 skipped、合成dummy/Codex ZIP/秘密検査通過。元の共有フォルダは保持。共通coreの残件はdocs/MIGRATION.mdと受入UPDATEに引き継ぐ。移行後のCodex開発はこのcloneで行う。
+
+## 2026-10-06 Cloud実翻訳準備
+
+Codex主担当: 新規config.codex.cloud.toml、tools/cloud_preflight.py、tests/test_cloud_preflight.py、docs/CLOUD_REAL_TRANSLATION.md/CLOUD_TRANSLATION_CHECKPOINT.md。共通readable/*.pyや共有サイトは編集しない。利用者のログイン後、Cloud環境セットアップを開始し依存関係・認証の確認中。3形式の公開英語論文をWebで確認、実要求0回。Cloud認証後に予算を再見積もりし、1論文を先に試す。

@@ -1,0 +1,18 @@
+# Cloud verification only. Windows application defaults remain in config.toml.
+# Install fonts-ipafont and fonts-dejavu-core in a Debian/Ubuntu environment.
+[structure]
+provider = "codex"
+
+[fonts]
+serif_regular = ["/usr/share/fonts/opentype/ipafont-mincho/ipam.ttf"]
+serif_bold = ["/usr/share/fonts/opentype/ipafont-mincho/ipam.ttf"]
+sans_regular = ["/usr/share/fonts/opentype/ipafont-gothic/ipag.ttf"]
+sans_bold = ["/usr/share/fonts/opentype/ipafont-gothic/ipag.ttf"]
+serif_italic = ["/usr/share/fonts/truetype/dejavu/DejaVuSerif-Italic.ttf"]
+sans_italic = ["/usr/share/fonts/truetype/dejavu/DejaVuSans-Oblique.ttf"]
+
+[gemini]
+workers = 1
+
+[assist]
+max_calls_per_doc = 4
