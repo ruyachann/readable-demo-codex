@@ -1,0 +1,4 @@
+PyMuPDF>=1.26
+fonttools>=4.40
+google-genai>=2.26
+tzdata; platform_system == "Windows"

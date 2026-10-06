@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-06",
+  "manifest_files": 119,
+  "runtime_source_hashes_match_snapshot": true,
+  "codex_default": true,
+  "codex_assist_registered": true,
+  "annotations_default_off": true,
+  "cli_help": "passed",
+  "webapp_help": "passed",
+  "dummy_exit_code": 0,
+  "ja_pages": 1,
+  "dual_pages": 2,
+  "dual_page_order": "English then Japanese",
+  "japanese_text": "present",
+  "codex_zip_verification": "passed",
+  "gemini_requests": 0,
+  "codex_requests": 0,
+  "personal_pdfs_used": 0,
+  "zip_sha256": "0cca8c5223734bbcf97a8d20bbd80335dedec84962b2b1129259858d317bf56c",
+  "pytest": {
+    "passed": 618,
+    "skipped": 59,
+    "failed": 0,
+    "seconds": 74.39
+  },
+  "test_provider_adaptations": 3,
+  "git_index_files": 123,
+  "git_index_allowlist": "passed",
+  "git_index_secret_scan": "passed",
+  "git_index_matches_working_files": true
+}

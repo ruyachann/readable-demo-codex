@@ -1,0 +1,5 @@
+
+ [エラー] Python のバージョンが古いです。Python 3.11 以上が必要です。
+ https://www.python.org/downloads/ から新しい Python をインストールし (Add python.exe to PATH にチェック)、
+ もう一度 setup.bat を実行してください。
+

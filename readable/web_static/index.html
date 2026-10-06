@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>英語PDF 日本語化</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--fg:#1d2330;--mute:#677084;--line:#dfe3ea;--acc:#2f5fd0;--accfg:#fff;--ok:#1c7c4a;--ng:#b3261e;--warn:#9a6700;--drop:#eef3ff}
+@media (prefers-color-scheme:dark){:root{--bg:#14171d;--card:#1d222b;--fg:#e6e9ef;--mute:#9099ab;--line:#2f3644;--acc:#6b93f0;--accfg:#0d1220;--ok:#5cc88c;--ng:#ff8a80;--warn:#e8b64c;--drop:#202a42}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 "Yu Gothic UI","Meiryo",system-ui,sans-serif}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.3rem;margin:8px 0 4px}
+p.sub{margin:0 0 16px;color:var(--mute);font-size:.9rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}
+#drop{border:2px dashed var(--acc);border-radius:12px;padding:32px 16px;text-align:center;cursor:pointer;background:var(--card)}
+#drop.over{background:var(--drop)}
+#drop strong{display:block;font-size:1.05rem;margin-bottom:4px}
+.opts{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:12px;align-items:center}
+.opts label{display:inline-flex;gap:6px;align-items:center}
+.opts small{color:var(--mute);flex-basis:100%}
+select{font:inherit;padding:4px 8px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--fg)}
+button,a.btn{font:inherit;display:inline-block;padding:6px 14px;border-radius:8px;border:1px solid var(--acc);background:var(--acc);color:var(--accfg);cursor:pointer;text-decoration:none}
+button.sec,a.btn.sec{background:transparent;color:var(--acc)}
+button.del{background:transparent;color:var(--mute);border-color:var(--line)}
+.job{border-top:1px solid var(--line);padding:12px 0}
+.job:first-child{border-top:0}
+.head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.name{font-weight:600;word-break:break-all}
+.badge{font-size:.8rem;padding:1px 10px;border-radius:99px;border:1px solid var(--line);color:var(--mute)}
+.badge.running{color:var(--acc);border-color:var(--acc)}.badge.done{color:var(--ok);border-color:var(--ok)}.badge.failed{color:var(--ng);border-color:var(--ng)}
+.steps{display:flex;gap:4px;margin:8px 0;flex-wrap:wrap}
+.steps span{font-size:.8rem;padding:2px 10px;border-radius:6px;background:var(--bg);color:var(--mute);border:1px solid var(--line)}
+.steps span.cur{color:var(--accfg);background:var(--acc);border-color:var(--acc)}
+.steps span.past{color:var(--ok);border-color:var(--ok)}
+.msg{margin:6px 0;font-size:.92rem}.msg.failed{color:var(--ng)}.msg.warn{color:var(--warn)}
+pre{margin:6px 0;padding:8px;background:var(--bg);border:1px solid var(--line);border-radius:8px;font:12px/1.5 Consolas,monospace;white-space:pre-wrap;word-break:break-all;max-height:11em;overflow:auto}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.empty{color:var(--mute);text-align:center;padding:12px}
+.note{font-size:.82rem;color:var(--mute)}
+h2{font-size:1.1rem;margin:0}h3{font-size:.95rem;margin:16px 0 4px}
+.checks{list-style:none;padding:0;margin:12px 0}
+.checks li{display:flex;gap:8px;padding:4px 0;align-items:baseline;flex-wrap:wrap}
+.checks .mk{font-weight:700;min-width:1.4em}.mk.ok{color:var(--ok)}.mk.ng{color:var(--ng)}.mk.opt{color:var(--mute)}
+.checks small{color:var(--mute);flex-basis:100%;padding-left:1.9em}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row input{flex:1 1 220px;font:inherit;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg)}
+code{background:var(--bg);padding:1px 6px;border-radius:4px}
+a{color:var(--acc)}
+#drop.disabled{opacity:.45;pointer-events:none}
+.msg.ok{color:var(--ok)}
+.pick-head{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.pick-meta{font-size:.85rem;color:var(--mute)}
+button.big{padding:8px 22px;font-weight:600}
+button:disabled{opacity:.5;cursor:default}
+.anote{margin:6px 0;font-size:.88rem;color:var(--mute)}
+.snote{margin:8px 0;padding:8px 10px;border:1px solid var(--warn);border-left-width:4px;border-radius:8px;color:var(--warn);font-weight:600;font-size:.92rem}
+.retry{margin:8px 0;padding:8px 10px;background:var(--bg);border:1px solid var(--line);border-radius:8px;display:flex;gap:8px 12px;align-items:center;flex-wrap:wrap}
+dialog{max-width:min(92vw,520px);border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--fg);padding:16px}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+dialog h3{margin:0 0 8px}dialog p{margin:6px 0}
+[hidden]{display:none!important}
+@media (max-width:480px){main{padding:10px}#drop{padding:24px 8px}}
+</style>
+</head>
+<body>
+<main>
+<h1>英語PDF を日本語PDF に変換</h1>
+<p id="edition" class="note">ローカルPDF翻訳</p>
+<p class="sub">このパソコンの中だけで動いています。PDF をここにドラッグ&amp;ドロップしてください (1 ファイルずつ処理します)。選んだだけでは始まりません。「翻訳を開始」を押すと始まります。</p>
+
+<section id="setup" class="card" hidden>
+  <div class="head"><h2 id="setup-title">初回設定</h2><button class="sec" id="setup-close" hidden>閉じる</button></div>
+  <ul id="checks" class="checks"></ul>
+
+  <div id="keybox">
+    <h3>Gemini API キー</h3>
+    <p class="note">翻訳に使います (無料)。<a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">Google AI Studio</a> を開き、Google アカウントでログインして「Create API key」で作成し、コピーして下に貼り付けてください。キーはこのパソコンの自分のユーザー領域 (%APPDATA%\ReadableJP) にだけ保存され、画面やログには表示されません。</p>
+    <div class="row"><input id="key" type="password" autocomplete="off" spellcheck="false" placeholder="AIza で始まるキーを貼り付け">
+      <button id="key-save">保存</button><button class="sec" id="key-test">接続テスト</button><button class="del" id="key-del">削除</button></div>
+    <p id="key-msg" class="msg"></p>
+  </div>
+
+  <div id="cli">
+    <h3 id="cli-title">構造補正 (任意)</h3>
+    <p id="cli-note" class="note">無くても簡易の構造解析で動きます。使う場合は、ご自身のCLIでログインしてください。</p>
+  </div>
+
+  <div id="consent-box">
+    <h3>プライバシーについて</h3>
+    <ul class="note">
+      <li>Gemini 無料枠では、入力・出力が Google のモデル改善 (学習) に使われる可能性があります。未公開の論文や機密文書は送らないでください。</li>
+      <li id="structure-consent">構造補正を使うと、各段落の抜粋が選んだAIの提供元へ送られます。</li>
+    </ul>
+    <label><input type="checkbox" id="agree"> 上記を理解し、同意します</label>
+  </div>
+</section>
+<button class="sec" id="setup-open" hidden style="margin-bottom:12px">設定を開く</button>
+
+<div id="drop" tabindex="0" role="button" aria-label="PDF を選択">
+  <strong>ここに PDF をドロップ、またはクリックして選択</strong>
+  <span class="note">200MB まで・パスワード無し・テキスト層のある PDF</span>
+  <input id="file" type="file" accept="application/pdf,.pdf" hidden>
+</div>
+
+<div class="card" id="pickcard" hidden>
+  <div class="pick-head">
+    <div><div class="name" id="pick-name"></div><div class="pick-meta" id="pick-meta"></div></div>
+    <button class="del" id="pick-clear" type="button">× ファイルを変更</button>
+  </div>
+  <div class="opts">
+    <label>出力
+      <select id="mode"><option value="both">両方</option><option value="ja">日本語版のみ</option><option value="dual">交互対訳版のみ</option></select>
+    </label>
+    <label class="note"><input type="checkbox" id="no-assist"> <span id="assist-label">Claudeに翻訳の補助をさせない</span></label>
+    <button id="start" class="big" type="button">翻訳を開始</button>
+    <p id="start-msg" class="msg" hidden></p>
+    <small><span id="structure-note"></span> Gemini 無料枠では入力・出力が学習に使われる可能性があります。未公開の論文や機密文書は送らないでください。<span id="structure-privacy"></span></small>
+  </div>
+</div>
+
+<dialog id="ask" aria-labelledby="ask-title">
+  <h3 id="ask-title"></h3><div id="ask-body"></div>
+  <div class="acts"><button id="ask-ok" type="button"></button><button id="ask-no" class="sec" type="button">やめる</button></div>
+</dialog>
+
+<div class="card"><div id="jobs"><div class="empty">まだ変換したファイルはありません。</div></div>
+<p id="replace-note" class="note msg warn" hidden>新しい翻訳を始めると、前回の結果は削除されます。必要ならいまダウンロードしてください。</p>
+<p class="note">最新の 1 件だけ保持します。アプリを終了すると消えます。</p></div>
+</main>
+<script>
+"use strict";
+const $=s=>document.querySelector(s);
+const STAGES=[["extract","抽出"],["structure","構造解析"],["translate","翻訳"],["render","PDF 生成"]];
+const LABEL={queued:"待機中",running:"処理中",done:"完了",failed:"失敗"};
+const drop=$("#drop"),file=$("#file");
+drop.onclick=()=>file.click();
+drop.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();file.click();}};
+["dragenter","dragover"].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.add("over");}));
+["dragleave","drop"].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.remove("over");}));
+drop.addEventListener("drop",e=>pick([...e.dataTransfer.files]));
+file.onchange=()=>{pick([...file.files]);file.value="";};
+window.addEventListener("dragover",e=>e.preventDefault());
+window.addEventListener("drop",e=>e.preventDefault());
+let JOBS=[],sending=false,PICKED=null;
+const CONFIRM_STOP="実行中の翻訳を中止して、新しく始めますか?";
+function fmtSize(n){return n>=1048576?(n/1048576).toFixed(1)+" MB":Math.max(1,Math.round(n/1024))+" KB";}
+function ask(title,bodyHtml,okLabel){
+  return new Promise(res=>{
+    const d=$("#ask");$("#ask-title").textContent=title;$("#ask-body").innerHTML=bodyHtml;$("#ask-ok").textContent=okLabel;
+    let done=false;const fin=v=>{if(done)return;done=true;d.close();res(v);};
+    $("#ask-ok").onclick=()=>fin(true);$("#ask-no").onclick=()=>fin(false);d.oncancel=()=>fin(false);
+    d.showModal();$("#ask-no").focus();
+  });
+}
+function startMsg(t,cls){const m=$("#start-msg");m.hidden=!t;m.textContent=t||"";m.className="msg "+(cls||"");}
+// 添付: ファイル名・ページ数・サイズを出すだけ。翻訳は「翻訳を開始」を押すまで始まらない
+async function pick(files){
+  if(sending||!files.length)return;
+  if(files.length>1)alert("一度に変換できるのは 1 ファイルです。最初の 1 つだけ選びます。");
+  const f=files[0];
+  if(!/\.pdf$/i.test(f.name)){alert("PDF ではありません: "+f.name);return;}
+  PICKED={file:f,pages:null,encrypted:false};
+  $("#pick-name").textContent=f.name;$("#pick-meta").textContent=fmtSize(f.size)+" · ページ数を確認中…";
+  $("#pickcard").hidden=false;startMsg("");
+  try{
+    const fd=new FormData();fd.append("file",f,f.name);
+    const r=await fetch("/api/inspect",{method:"POST",body:fd});const j=await r.json().catch(()=>({}));
+    if(!PICKED||PICKED.file!==f)return;
+    if(!r.ok){$("#pick-meta").textContent=fmtSize(f.size);startMsg(j.error||"確認できませんでした","failed");return;}
+    PICKED.pages=j.pages;PICKED.encrypted=j.encrypted;
+    $("#pick-meta").textContent=(j.pages?j.pages+" ページ · ":"")+fmtSize(j.bytes);
+    if(j.encrypted)startMsg("パスワード付きの PDF です。パスワードを解除したものを選んでください。","failed");
+  }catch(e){$("#pick-meta").textContent=fmtSize(f.size);}
+}
+$("#pick-clear").onclick=()=>{if(sending)return;PICKED=null;$("#pickcard").hidden=true;startMsg("");};
+async function send(f,replace,structure){
+  const fd=new FormData();
+  fd.append("mode",$("#mode").value);
+  fd.append("structure",structure?"1":"0");
+  fd.append("no_assist",$("#no-assist").checked?"1":"0");
+  if(replace)fd.append("replace","1");
+  fd.append("file",f,f.name);
+  return fetch("/api/jobs",{method:"POST",body:fd});
+}
+// 「翻訳を開始」: 構成の整理は常にオン。使えないときだけ、理由と直し方を見せて確認する
+async function startTranslation(){
+  if(sending||!PICKED)return;
+  const selected=PICKED;
+  if(PICKED.encrypted){startMsg("パスワード付きの PDF です。パスワードを解除したものを選んでください。","failed");return;}
+  sending=true;$("#start").disabled=true;drop.classList.add("disabled");startMsg("構成の整理の状態を確認しています…");
+  try{
+    const structure=await confirmStructure();
+    if(structure===null)return;
+    const active=JOBS.some(j=>j.status==="running"||j.status==="queued");
+    if(active&&!confirm(CONFIRM_STOP))return;
+    startMsg("");
+    let r=await send(selected.file,active,structure);
+    if(r.status===409){if(!confirm(CONFIRM_STOP))return;r=await send(selected.file,true,structure);}
+    if(!r.ok){const j=await r.json().catch(()=>({}));startMsg(selected.file.name+": "+(j.error||r.status),"failed");return;}
+    if(PICKED===selected){PICKED=null;$("#pickcard").hidden=true;}
+  }catch(e){startMsg("送信に失敗しました","failed");}
+  finally{sending=false;$("#start").disabled=false;if(SETUP)renderSetup();else drop.classList.remove("disabled");}
+  poll();
+}
+$("#start").onclick=startTranslation;
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function setText(n,t){if(n.textContent!==t)n.textContent=t;}
+function setClass(n,c){if(n.className!==c)n.className=c;}
+function mkJob(j){
+  const el=document.createElement("div");el.className="job";el.dataset.id=j.id;
+  el.innerHTML='<div class="head"><span class="name"></span><span class="badge"></span></div><div class="steps">'+
+    STAGES.map(s=>"<span>"+s[1]+"</span>").join("")+'</div><div class="msg" hidden></div><div class="snote" hidden></div><div class="anote" hidden></div><div class="retry" hidden><span class="retry-text"></span><button type="button" class="retry-btn">この段落だけ再翻訳する</button></div><pre hidden></pre><div class="acts"></div>';
+  el.querySelector(".name").textContent=j.name;
+  return el;
+}
+function actsHtml(j){
+  const o=j.outputs||{},a=[];
+  if(o.ja)a.push(`<a class="btn" href="${esc(o.ja)}">日本語版をダウンロード</a><a class="btn sec" target="_blank" rel="noopener" href="${esc(o.ja)}?inline=1">プレビュー</a>`);
+  if(o.dual)a.push(`<a class="btn" href="${esc(o.dual)}">交互対訳版をダウンロード</a><a class="btn sec" target="_blank" rel="noopener" href="${esc(o.dual)}?inline=1">プレビュー</a>`);
+  a.push(`<button class="del" data-id="${esc(j.id)}" data-act="${j.status==="running"||j.status==="queued"?"cancel":"delete"}">${j.status==="running"||j.status==="queued"?"中止":"削除"}</button>`);
+  return a.join("");
+}
+// 変わった部分だけ更新する (フォーカス・ログのスクロール位置を保つ)
+function updJob(el,j){
+  const badge=el.querySelector(".badge");
+  setClass(badge,"badge "+j.status);
+  setText(badge,(LABEL[j.status]||j.status)+(j.exit_code?` (終了コード ${j.exit_code})`:""));
+  const idx=STAGES.findIndex(s=>s[0]===j.stage);
+  el.querySelectorAll(".steps span").forEach((sp,i)=>{
+    let c="";if(j.status==="done"||(idx>=0&&i<idx))c="past";else if(j.status==="running"&&i===idx)c="cur";
+    setClass(sp,c);
+  });
+  const m=el.querySelector(".msg"),show=!!j.message_ja&&j.status!=="running"&&j.status!=="queued";
+  m.hidden=!show;
+  if(show){setClass(m,"msg "+(j.status==="failed"?"failed":j.warning?"warn":""));setText(m,j.message_ja);}
+  const an=el.querySelector(".anote"),ant=j.assist_message||"";an.hidden=!ant;setText(an,ant);
+  const sn=el.querySelector(".snote"),snt=j.structure_message||"";
+  sn.hidden=!snt;setText(sn,snt);
+  const rt=el.querySelector(".retry"),rb=el.querySelector(".retry-btn");
+  rt.hidden=!j.can_retry;rb.dataset.id=j.id;
+  if(j.can_retry){
+    let t="";
+    if(j.exit_code===12)t="英語のまま残った段落: "+(j.failed_paragraphs!=null?j.failed_paragraphs+"件":"あります");
+    else if(j.exit_code===7)t="明日16時以降に押すと続きから";
+    else if(j.exit_code===130)t="中止しました。押すと続きから再翻訳します";
+    else t="API の問題で止まりました。時間をおいて押すと続きから";
+    setText(el.querySelector(".retry-text"),t);
+  }
+  const pre=el.querySelector("pre"),text=(j.log_tail||[]).join("\n");
+  pre.hidden=!text;
+  if(pre.textContent!==text){
+    const atBottom=pre.scrollTop+pre.clientHeight>=pre.scrollHeight-4,keep=pre.scrollTop;
+    pre.textContent=text;
+    pre.scrollTop=atBottom?pre.scrollHeight:keep;
+  }
+  const o=j.outputs||{},sig=j.status+"|"+(o.ja||"")+"|"+(o.dual||""),acts=el.querySelector(".acts");
+  if(acts.dataset.sig!==sig){
+    const fi=[...acts.children].indexOf(document.activeElement);
+    acts.innerHTML=actsHtml(j);acts.dataset.sig=sig;
+    if(fi>=0){const c=acts.children[Math.min(fi,acts.children.length-1)];if(c)c.focus();}
+  }
+}
+function showBox(state,html){const box=$("#jobs");if(box.dataset.state!==state){box.innerHTML=html;box.dataset.state=state;}}
+function render(jobs){
+  JOBS=jobs;
+  $("#replace-note").hidden=!jobs.some(j=>j.status==="done"||j.status==="failed");
+  const box=$("#jobs");
+  if(!jobs.length){showBox("empty",'<div class="empty">まだ変換したファイルはありません。</div>');return;}
+  if(box.dataset.state!=="jobs"){box.innerHTML="";box.dataset.state="jobs";}
+  const ids=new Set(jobs.map(j=>j.id));
+  box.querySelectorAll(".job").forEach(el=>{if(!ids.has(el.dataset.id))el.remove();});
+  jobs.forEach(j=>{
+    let el=box.querySelector('.job[data-id="'+j.id+'"]');
+    if(!el){el=mkJob(j);box.appendChild(el);}
+    updJob(el,j);
+  });
+}
+$("#jobs").addEventListener("click",async e=>{
+  const r=e.target.closest("button.retry-btn");
+  if(r){if(sending)return;sending=true;r.disabled=true;
+    try{const structure=await confirmStructure();if(structure===null)return;
+      const x=await api("POST","/api/jobs/"+r.dataset.id+"/retry",{structure});
+      if(!x.ok)alert(x.j.error||"再翻訳を始められませんでした");poll();
+    }catch(e){alert("構成の整理の状態を確認できませんでした。接続を確認して、もう一度お試しください。");}
+    finally{sending=false;r.disabled=false;renderSetup();}return;}
+  const b=e.target.closest("button.del");if(!b)return;
+  if(b.dataset.act==="cancel"){b.disabled=true;await api("POST","/api/jobs/"+b.dataset.id+"/cancel",{});poll();return;}  // 中止: 処理だけ止めて PDF は残す
+  await fetch("/api/jobs/"+b.dataset.id,{method:"DELETE"});poll();
+});
+let timer=null;
+function scheduleNext(ms){clearTimeout(timer);timer=ms?setTimeout(poll,ms):null;}  // 実行中だけ繰り返す。完了後は止める
+async function poll(){
+  clearTimeout(timer);
+  try{
+    const r=await fetch("/api/jobs");
+    if(r.status===401){showBox("auth",'<div class="empty">認証が切れました。翻訳アプリ.bat から開き直してください。</div>');return;}
+    const d=await r.json();render(d.jobs);
+    scheduleNext(d.jobs.some(j=>j.status==="running"||j.status==="queued")?1500:0);
+  }catch(e){
+    showBox("error",'<div class="empty">アプリに接続できません。翻訳アプリ.bat のウィンドウが閉じていないか確認してください。</div>');
+    scheduleNext(4000);
+  }
+}
+let SETUP=null,forceOpen=false;
+async function api(method,path,body){
+  const r=await fetch(path,{method,headers:body?{"Content-Type":"application/json"}:{},body:body?JSON.stringify(body):undefined});
+  const j=await r.json().catch(()=>({}));return {ok:r.ok,j};
+}
+function chk(state,label,detail){
+  const m=state===true?["ok","✓"]:state===false?["ng","✕"]:["opt","–"];
+  return `<li><span class="mk ${m[0]}">${m[1]}</span><span>${label}</span>${detail?`<small>${esc(detail)}</small>`:""}</li>`;
+}
+function cliLine(name,s){
+  if(s.detail)return chk(s.logged_in===true?true:false,name,s.detail);
+  if(!s.found)return chk(false,name,"見つかりません。導入して契約アカウントでログインしてください");
+  if(s.logged_in===true)return chk(true,name,"ログイン済み");
+  if(s.logged_in===false)return chk(false,name,"未ログインです。契約アカウントでログインしてください");
+  return chk(null,name,"インストール済み (ログイン状態は確認できませんでした)");
+}
+function renderSetup(){
+  const s=SETUP;if(!s)return;
+  const provider=s.structure_provider||"claude",isCodex=provider==="codex",disabled=provider==="none";
+  const name=isCodex?"Codex":"Claude",company=isCodex?"OpenAI":"Anthropic";
+  $("#edition").textContent=disabled?"Gemini翻訳 / 簡易構造解析":name+"版 / Gemini翻訳";
+  document.title="英語PDF 日本語化 · "+(disabled?"簡易解析":name+"版");
+  $("#cli").hidden=disabled;
+  $("#cli-title").textContent=isCodex?"Codex CLI":"Claude Code";
+  $("#cli-note").textContent=(isCodex?"Codex CLIを導入し、ターミナルで codex login を実行してご自身のChatGPTアカウントへログインしてください。このアプリはログインを代行しません。":"Claude Codeを導入し、claude を起動して /login でご自身の契約アカウントへログインしてください。")+"構造補正が使えない場合は、理由を確認し、続行を承認した場合だけ翻訳します。";
+  $("#structure-note").textContent=disabled?"この起動設定ではAIの構造補正を使いません。":name+"による構成の整理を、常に行います。";
+  const asup=!!(s.assist&&s.assist.supported);
+  const assistText=disabled?"":" 翻訳の補助では、用語集の点検のために題名・要旨 (最大 900 文字)・用語集を、問題のある段落の補正のためにその段落の原文と訳文を、"+company+" に送ります (オフにできます)"+(asup?"。":"。(この版では現在未対応のため、送られません。)");
+  const privacy=disabled?"":"構造補正を使うと、各段落の抜粋 (先頭・末尾の数十文字) が "+company+" に送られます。"+assistText;
+  $("#assist-label").textContent=name+"に翻訳の補助をさせない"+(asup||disabled?"":" (この版では未対応)");
+  $("#no-assist").disabled=disabled||!asup;if(disabled||!asup)$("#no-assist").checked=false;
+  $("#structure-consent").textContent=privacy;$("#structure-privacy").textContent=privacy;
+  $("#checks").innerHTML=
+    chk(s.python.ok,"Python "+s.python.version,s.python.ok?"":"3.11 以上が必要です")+
+    chk(s.packages.ok,"必要なライブラリ",s.packages.ok?"":"未導入: "+s.packages.missing.join(", ")+" → setup.bat を実行してください")+
+    chk(s.fonts.ok,"日本語フォント",s.fonts.detail)+
+    chk(s.gemini.configured,"Gemini API キー",s.gemini.configured?s.gemini.masked+(s.gemini.source==="env"?" (環境変数 GEMINI_API_KEY を使用中)":""):"未設定")+
+    (disabled?"":cliLine(isCodex?"Codex CLI":"Claude Code",isCodex?s.codex:s.claude))+
+    chk(s.consent,"プライバシーへの同意",s.consent?"":"下のチェックが必要です");
+  $("#agree").checked=s.consent;$("#agree").disabled=s.consent;
+  $("#key-del").hidden=s.gemini.source!=="file";
+  const open=!s.ready||forceOpen;
+  $("#setup").hidden=!open;$("#setup-open").hidden=open;$("#setup-close").hidden=!s.ready;
+  $("#setup-title").textContent=s.ready?"設定":"初回設定";
+  $("#drop").classList.toggle("disabled",!s.ready||sending);
+}
+async function loadSetup(){const r=await api("GET","/api/setup");if(r.ok){SETUP=r.j;renderSetup();}return r.ok;}
+async function confirmStructure(){
+  if(!await loadSetup()||!SETUP.structure||typeof SETUP.structure.enabled!=="boolean")throw new Error("structure status unavailable");
+  const st=SETUP.structure;
+  if(!st.enabled)return false;
+  if(st.usable)return true;
+  const ok=await ask(st.name+" による構成の整理を使えません",
+    "<p><b>理由:</b> "+esc(st.reason)+"</p><p><b>直し方:</b> "+esc(st.fix)+"</p><p><b>構成の整理なしで続けますか? (品質が下がる場合があります)</b></p>","構成の整理なしで続ける");
+  return ok?false:null;
+}
+$("#setup-open").onclick=()=>{forceOpen=true;renderSetup();};
+$("#setup-close").onclick=()=>{forceOpen=false;renderSetup();};
+$("#agree").onchange=async e=>{if(e.target.checked){await api("POST","/api/setup/consent",{agree:true});loadSetup();}};
+function keyMsg(t,ok){const m=$("#key-msg");m.textContent=t;m.className="msg "+(ok?"ok":"failed");}
+$("#key-save").onclick=async()=>{
+  const v=$("#key").value.trim();if(!v){keyMsg("キーを貼り付けてください",false);return;}
+  const r=await api("POST","/api/setup/key",{key:v});
+  if(r.ok){$("#key").value="";keyMsg("保存しました",true);}else keyMsg(r.j.error||"保存に失敗しました",false);
+  loadSetup();
+};
+$("#key-test").onclick=async()=>{
+  keyMsg("接続を確認しています…",true);
+  const r=await api("POST","/api/setup/test-key",{});
+  keyMsg(r.ok?r.j.message_ja:(r.j.error||"失敗しました"),r.ok&&r.j.ok);
+};
+$("#key-del").onclick=async()=>{await api("DELETE","/api/setup/key");keyMsg("保存したキーを削除しました",true);loadSetup();};
+poll();loadSetup();
+</script>
+</body>
+</html>

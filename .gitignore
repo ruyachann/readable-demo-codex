@@ -1,0 +1,38 @@
+# Local configuration, credentials, and AI sessions
+.env
+.env.*
+!.env.example
+secrets.json
+auth.json
+credentials.json
+settings.json
+.credentials*
+.codex/
+.claude/
+
+# Private documents and generated artifacts (including synthetic test outputs)
+*.pdf
+*.zip
+*.log
+english_paper/
+work/
+out/
+dist/
+website/dist/
+website/verification.json
+website/sample_report.json
+tests/eval/results/
+
+# Python/OS caches and local installations
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+*.tmp
+.app.lock
+.app.json
+Thumbs.db
+.DS_Store

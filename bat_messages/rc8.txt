@@ -1,0 +1,1 @@
+        Gemini の設定・権限の問題です (API キーが無効、モデル名の誤り、利用地域外など)。GEMINI_API_KEY と config.toml を確認してください。

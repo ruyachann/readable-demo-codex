@@ -1,0 +1,63 @@
+# Readable代替 設定ファイル
+
+[gemini]
+translate_model = "gemini-3.5-flash-lite"   # 翻訳 (M3)
+refine_model    = "gemini-3.5-flash"        # 見直し・用語集 (M3)
+rpm             = 5                         # 1分あたりリクエスト上限
+refine          = false                     # 全 unit の見直し(⑤)。既定OFF (効果が小さい)。OFFでも 検証失敗/英語残りの unit だけは選択的に見直す
+thinking_level  = "minimal"
+pages_per_batch = 6                         # 1リクエストにまとめるページ数 (M9: 3 -> 6。リクエスト数を減らして処理を速くする)
+max_chars       = 18000                     # 1リクエストの原文文字数上限 (翻訳。M9: 9000 -> 18000)
+workers         = 3                         # 独立なバッチを同時に送る数 (送信の間隔は rpm で守る。M9)
+validate_retries = 1                        # 検証 NG の unit のバッチ内での再送回数 (残りは選択的な再翻訳で全バッチ分をまとめて 1 回)
+glossary        = true                      # 用語集の自動作成
+# translate_prompt / refine_prompt / glossary_prompt でプロンプトファイルのパスを変更可
+
+[table_terms]
+annotations = false                         # 表・図の和訳ホバー注釈 (M12: 既定は付けない。true で付ける)
+color = ""                                  # 本文の (English) 部分の色。既定は色なし・下線なし (M9)。"#1a3d8f" などで色と下線
+annotation_style = "invisible"              # 図表の和訳の注釈: invisible (見える印なし) | highlight (不透明度 1%) | text (付箋アイコン)
+
+[claude]
+model   = "sonnet"
+timeout = 120                               # 秒 (M2)
+
+[fonts]
+# 先頭から順に試し、埋め込めなかったものは次の候補にする。可変フォントは使わない。
+serif_regular = ["C:/Windows/Fonts/yumin.ttf"]
+serif_bold    = ["C:/Windows/Fonts/yumindb.ttf"]
+sans_regular  = ["C:/Windows/Fonts/YuGothM.ttc", "C:/Windows/Fonts/meiryo.ttc"]
+sans_bold     = ["C:/Windows/Fonts/YuGothB.ttc", "C:/Windows/Fonts/meiryob.ttc"]
+
+[extract]
+row_gap_min         = 14.0    # 同一行内で別の段とみなす最小の空き(pt)
+row_gap_factor      = 1.8     # 〃 サイズ倍率 (max(min, factor*小さい方のサイズ))
+para_max_pitch      = 1.9     # 行送り上限 (サイズ倍)
+para_indent_factor  = 0.8     # これ以上字下げされた行は新段落 (サイズ倍)
+short_line_factor   = 2.5     # 前行がこれ以上短ければ段落末 (サイズ倍)
+size_tol_abs        = 0.6     # サイズ一致の許容差
+size_tol_rel        = 0.06
+sub_size_ratio      = 0.85    # 下付き判定: サイズが行の主サイズのこの倍率未満
+repeat_min_pages    = 3       # ヘッダ/フッタ判定: 同一文字列の最小出現ページ数 (未満の文書は位置6%+サイズで判定)
+header_zone         = 0.06    # 位置によるヘッダ/フッタ判定の帯 (ページ高さ比)
+table_min_width_frac = 0.08   # 表の罫線の最小幅 (ページ幅比)
+table_margin_frac   = 0.07    # ページ上下この割合内の罫線は表から除外
+table_tabular_ratio = 0.25    # 罫線2本/枠のみの領域を表とみなす閾値
+translate_tables    = false   # true で表本体も翻訳
+protect_inline      = true    # メール/URL/DOI/助成番号/数式片を {vN} で保護
+
+[render]
+line_height    = 1.5
+shrink_step    = 0.05         # 縮小の刻み (原文サイズに対する割合)
+min_scale      = 0.7          # 縮小の下限 (原文サイズ倍)。それでも入らなければ scale_low=0 + 警告
+min_font       = 6.5          # 読みやすさの下限 (pt。M13: 5.5 -> 6.5)。収まらないときだけ min_font_hard まで縮める (警告つき)
+min_font_hard  = 5.5          # 最終手段の縮小の下限 (pt)
+expand_margin  = 4.0          # 枠拡張時、下の要素との余白(pt)
+bottom_margin  = 24.0
+redact_inset   = 0.5          # redact矩形の上下を内側に縮める量(pt)
+justify        = true
+subset_fonts   = true
+wide_heading   = true         # 1行見出しは縮小より先に横へ広げて2行に折り返す
+
+[structure]
+provider = "codex"

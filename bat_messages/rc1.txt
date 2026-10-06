@@ -1,0 +1,1 @@
+        想定外のエラーです。work\last_error.log を開発者に見せてください (README.md 参照)。

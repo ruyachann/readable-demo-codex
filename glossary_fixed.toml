@@ -1,0 +1,113 @@
+# 固定訳 (どの論文でも優先される訳語)。論文ごとに Gemini が作る用語集より優先され、論文の本文に出てきた語だけが翻訳に渡される。
+# 追加・変更は自由 (大文字小文字は区別しない)。論文ごとの glossary_override.json があるときは、そちらが優先され、この表は使われない。
+#
+# [terms]    英語 = 日本語
+# [variants] 日本語 (上の訳語) = ["訳文に出てしまいがちな別表記", ...]  (翻訳後に、ここに書いた別表記を上の訳語へ統一する。省略可)
+
+[terms]
+# --- 統計 ---
+"inferential statistics" = "推測統計"
+"descriptive statistics" = "記述統計"
+"Bonferroni correction" = "ボンフェローニ補正"
+"Bonferroni-corrected" = "ボンフェローニ補正済み"
+"mixed-effects model" = "混合効果モデル"
+"linear mixed-effects model" = "線形混合効果モデル"
+"generalized linear mixed model" = "一般化線形混合モデル"
+"repeated-measures ANOVA" = "反復測定分散分析"
+"analysis of variance" = "分散分析"
+"effect size" = "効果量"
+"confidence interval" = "信頼区間"
+"standard deviation" = "標準偏差"
+"standard error" = "標準誤差"
+"null hypothesis" = "帰無仮説"
+"statistical significance" = "統計的有意性"
+"outlier" = "外れ値"
+"post hoc test" = "事後検定"
+"planned comparison" = "計画比較"
+"cluster-based permutation test" = "クラスターベース順列検定"
+"permutation test" = "順列検定"
+"Wilcoxon signed-rank test" = "ウィルコクソンの符号順位検定"
+"Mann-Whitney U test" = "マン・ホイットニーのU検定"
+"Shapiro-Wilk test" = "シャピロ・ウィルク検定"
+"Spearman correlation" = "スピアマンの順位相関"
+"Pearson correlation" = "ピアソンの積率相関"
+"Likert scale" = "リッカート尺度"
+"within-subjects design" = "参加者内計画"
+"between-subjects design" = "参加者間計画"
+"counterbalancing" = "カウンターバランス"
+"sample size" = "サンプルサイズ"
+"two-way ANOVA" = "二元配置分散分析"
+"one-way ANOVA" = "一元配置分散分析"
+"correct rejection" = "正棄却"
+"false alarm" = "誤警報"
+"hit rate" = "ヒット率"
+"ms" = "ミリ秒"
+# --- 神経科学・睡眠・記憶 ---
+"slow oscillation" = "徐波"
+"slow wave" = "徐波"
+"slow-wave sleep" = "徐波睡眠"
+"sleep spindle" = "睡眠紡錘波"
+"spindle" = "紡錘波"
+"electroencephalography" = "脳波"
+"event-related potential" = "事象関連電位"
+"working memory" = "ワーキングメモリ"
+"long-term memory" = "長期記憶"
+"declarative memory" = "宣言的記憶"
+"memory consolidation" = "記憶の固定化"
+"REM sleep" = "レム睡眠"
+"non-REM sleep" = "ノンレム睡眠"
+"targeted memory reactivation" = "標的記憶再活性化"
+"TMR" = "標的記憶再活性化 (TMR)"
+"closed-loop" = "クローズドループ"
+# --- 機械学習 (M14) ---
+"layer" = "層"
+"error" = "誤差"
+"training error" = "訓練誤差"
+"test error" = "テスト誤差"
+"validation error" = "検証誤差"
+"training" = "学習"
+"plain network" = "プレーンネットワーク"
+"residual learning" = "残差学習"
+"unsupervised session" = "実験者の立ち会いなしのセッション"
+"supervised session" = "実験者の立ち会いありのセッション"
+# --- 動物行動・福祉 ---
+"visitor effect" = "ビジター効果"
+"ethogram" = "エソグラム"
+"interobserver reliability" = "観察者間信頼性"
+# --- VR / HCI ---
+"virtual reality" = "仮想現実"
+"augmented reality" = "拡張現実"
+"mixed reality" = "複合現実"
+"head-mounted display" = "ヘッドマウントディスプレイ"
+"field of view" = "視野角"
+"haptic feedback" = "触覚フィードバック"
+"sense of presence" = "臨場感"
+"cybersickness" = "VR酔い"
+"user study" = "ユーザスタディ"
+"usability" = "ユーザビリティ"
+"latency" = "遅延"
+"frame rate" = "フレームレート"
+"degrees of freedom" = "自由度"
+"avatar" = "アバター"
+"embodiment" = "身体化"
+"telepresence" = "テレプレゼンス"
+"teleportation" = "テレポート移動"
+"eye tracking" = "視線計測"
+"think-aloud" = "発話思考法"
+"System Usability Scale" = "システムユーザビリティスケール"
+
+[variants]
+"推測統計" = ["推計統計", "推定統計"]
+"徐波" = ["徐発振", "緩徐振動", "徐波発振"]
+"睡眠紡錘波" = ["スリープスピンドル"]
+"ボンフェローニ補正" = ["ボンフェロニ補正", "ボンフェローニ修正"]
+"ビジター効果" = ["来園者効果"]
+"ユーザスタディ" = ["ユーザー調査", "ユーザ調査"]
+"標的記憶再活性化" = ["標的記憶想起", "標的記憶の再活性化", "ターゲット記憶再活性化", "標的記憶再賦活", "標的記憶再活性"]
+"クローズドループ" = ["閉ループ", "閉鎖ループ", "クローズド・ループ"]
+"正棄却" = ["正しい棄却", "正拒否", "正しい拒否"]
+"誤警報" = ["誤報", "虚報", "フォールスアラーム"]
+"二元配置分散分析" = ["2元配置分散分析", "二要因分散分析", "2要因分散分析"]
+"層" = ["レイヤー", "レイヤ"]
+"誤差" = ["エラー"]
+"学習" = ["トレーニング"]

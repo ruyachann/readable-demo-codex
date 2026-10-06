@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, nosnippet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="英語の論文PDFを、図や数式を残して日本語で読む。Claude版・Codex版を選べるWindows向けソースコード配布。利用者自身のGemini APIキーとCLI認証を使用します。">
+  <meta name="theme-color" content="#132b3a">
+  <title>PDF Translate — 英語の論文を、日本語で読む。</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">本文へ移動</a>
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand" href="#" aria-label="PDF Translate トップ"><span class="brand-mark" aria-hidden="true">文</span><span>PDF <strong>Translate</strong></span></a>
+    <nav aria-label="メインナビゲーション"><a href="#features">できること</a><a href="#example">翻訳例</a><a href="#guide">使い始め方</a><a href="#faq">FAQ</a></nav>
+    <a class="nav-download" href="#download"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 17v4h14v-4"/></svg>ダウンロード</a>
+  </div>
+</header>
+<main id="main">
+  <section class="hero section-wrap">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="eyebrow-line"></span> 英語PDFから、日本語PDFへ</p>
+      <h1><span class="heading-line">英語の論文を、</span><span class="heading-line"><span class="heading-emphasis">日本語で読む。</span></span></h1>
+      <p class="hero-description">図や数式を見ながら、本文は日本語で。論文の配置をできるだけ保ち、あなたのPCで読みやすいPDFをつくります。</p>
+      <div class="hero-actions"><a class="button button-primary" href="#download"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 17v4h14v-4"/></svg>コードをダウンロード</a><a class="button button-quiet" href="#example">翻訳例を見る</a></div>
+      <p class="hero-meta"><span class="meta-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v12H3zM8 21h8m-4-4v4"/></svg>Windows 10 / 11</span><span class="meta-item">Python 3.11以上</span><span class="meta-item">ご自身のAIを使用</span></p>
+    </div>
+    <div class="hero-preview" aria-label="日本語版PDFの表示例">
+      <div class="preview-top"><span class="preview-file"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6zM14 3v5h4"/></svg>research_note_ja.pdf</span><span class="preview-chip">日本語版</span></div>
+      <div class="preview-paper"><img src="assets/sample-ja.png" width="900" height="1274" alt="架空の研究メモの日本語版。日本語の本文と英語のままの棒グラフを配置したPDF。" fetchpriority="high"></div>
+      <div class="preview-bottom"><span>EN <span class="conversion-line" aria-hidden="true"></span> JA</span><span>図・数式のある場所は、そのまま。</span></div>
+      <div class="preview-note">架空の研究メモによる描画例</div>
+    </div>
+  </section>
+  <div class="facts-strip"><div class="section-wrap facts-inner"><span>読むための、2つの出力。</span><span><b>JA</b> 日本語版PDF</span><span><b>EN + JA</b> 日英交互版PDF</span><span class="facts-last">PDF処理は、お使いのPCで。</span></div></div>
+  <section id="features" class="section-wrap features-section">
+    <div class="section-heading"><div><p class="eyebrow">できること</p><h2><span class="heading-line">論文の見取り図を、</span><span class="heading-line">残したまま。</span></h2></div><p>文章の理解と、図の確認を行き来しやすく。読むために必要な形を、できるだけ保ちます。</p></div>
+    <div class="feature-grid">
+      <article><span class="feature-number">01 / LAYOUT</span><h3>図や数式を残す</h3><p>本文やキャプションを日本語に置き換え、図・表・数式は原文を保持。文字の長さに応じて配置やサイズを調整します。</p></article>
+      <article><span class="feature-number">02 / GLOSSARY</span><h3>専門用語を揃える</h3><p>文書ごとの用語集をつくり、訳語の表記を統一。<code>glossary_fixed.toml</code> に書いた固定訳は、どの論文でも優先します。</p></article>
+      <article><span class="feature-number">03 / YOUR PC</span><h3>自分の環境で使う</h3><p>PDF処理はPC上で実行。Gemini APIキーと、Claude CodeまたはCodex CLIの認証は、利用者自身のものを使います。</p></article>
+      <article><span class="feature-number">04 / TABLES</span><h3>表の用語を本文と対応づける</h3><p>図・表の本体と中の文字は英語のまま残します。本文の対応する用語は各ページの初出だけ「日本語 (English)」で併記し、色や下線は付けません。表や図への和訳の注釈は付けません (設定で付けることもできます)。</p></article>
+      <article><span class="feature-number">05 / SCANS &amp; LINKS</span><h3>スキャン本とリンクにも</h3><p>OCR文字層のあるスキャンPDFに対応。原文のリンクとしおり (目次) も維持します。画像だけでOCR文字層の無いPDFや、スライドPDFは対象外です。</p></article>
+      <article><span class="feature-number">06 / RESUME</span><h3>上限が来ても、続きから</h3><p>Gemini無料枠の日次上限で止まっても、翻訳済みの部分は保存されます。翌日に同じPDFを渡せば続きから再開します。</p></article>
+    </div>
+  </section>
+  <section id="example" class="example-section">
+    <div class="section-wrap">
+      <div class="section-heading"><div><p class="eyebrow">翻訳後の見た目</p><h2><span class="heading-phrase">同じページで、</span><span class="heading-phrase">見比べる。</span></h2></div><p>本文は日本語に、グラフは元のまま。クリックするとページを拡大できます。</p></div>
+      <div class="comparison-toolbar"><span class="sample-name">SAMPLE 01 <span>読書環境に関する架空の研究メモ</span></span><div class="view-controls" role="group" aria-label="比較表示"><button type="button" data-view="both" aria-pressed="true">並べて比較</button><button type="button" data-view="en" aria-pressed="false">原文</button><button type="button" data-view="ja" aria-pressed="false">日本語版</button></div></div>
+      <div class="comparison-grid" data-comparison>
+        <figure data-paper="en"><figcaption><span>ORIGINAL</span><strong>英語の原文</strong><button type="button" class="zoom-button" data-zoom="en" aria-label="英語の原文を拡大"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6M10 7v6m-3-3h6"/></svg></button></figcaption><button class="paper-button" type="button" data-zoom="en" aria-label="英語の原文PDFの表示例を拡大"><img src="assets/sample-en.png" width="900" height="1274" loading="lazy" alt="英語の研究メモの原文。見出し、本文、棒グラフ、キャプションのある1ページ。"></button></figure>
+        <figure data-paper="ja"><figcaption><span>JAPANESE</span><strong>日本語版</strong><button type="button" class="zoom-button" data-zoom="ja" aria-label="日本語版を拡大"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6M10 7v6m-3-3h6"/></svg></button></figcaption><button class="paper-button" type="button" data-zoom="ja" aria-label="日本語版PDFの表示例を拡大"><img src="assets/sample-ja.png" width="900" height="1274" loading="lazy" alt="研究メモの日本語版。本文と見出し、キャプションが日本語になり、棒グラフが原文の位置に残る1ページ。"></button></figure>
+      </div>
+      <div class="example-caption"><p>掲載例は架空の文書です。手動で用意した訳文を、配布ツールのPDF描画処理で出力しています。Geminiの翻訳精度を示す例ではありません。実際の配置や文字サイズは、原文と訳文の長さにより変わります。</p><a href="assets/sample-dual.pdf" download>サンプルPDFをダウンロード</a></div>
+    </div>
+  </section>
+  <section class="section-wrap output-section">
+    <div><p class="eyebrow">出力形式</p><h2><span class="heading-line">日本語で読む。</span><span class="heading-line">原文も確かめる。</span></h2><p>1回の処理で、2種類のPDFを出力します。用途に合わせて、片方だけの生成も選べます。</p></div>
+    <div class="output-options"><article><div class="output-title"><span class="file-pill">JA</span><h3>日本語版</h3><code>論文_ja.pdf</code></div><p>翻訳対象の本文・見出し・キャプションを日本語にしたPDF。図中の文字、表本体、参考文献などは既定で原文を残します。</p></article><article><div class="output-title"><span class="file-pill dual-pill">EN / JA</span><h3>日英交互版</h3><code>論文_dual.pdf</code></div><p>原文と訳文を1ページずつ交互に収録。翻訳を読みながら、直前の原文ページで内容を確かめられます。</p><div class="page-order" aria-label="英語1ページ、日本語1ページ、英語2ページ、日本語2ページの順"><span>EN <small>01</small></span><span class="ja-page">JA <small>01</small></span><span>EN <small>02</small></span><span class="ja-page">JA <small>02</small></span><i>…</i></div></article></div>
+  </section>
+  <section id="download" class="download-section">
+    <div class="section-wrap download-inner">
+      <div><p class="eyebrow">Windows向け / ソースコード配布</p><h2><span class="heading-line">自分のPCで、</span><span class="heading-line">はじめる。</span></h2><p>普段使うAIに合わせて、構造補正の担当を選べます。英日翻訳はどちらもGeminiを使います。</p>
+        <div class="edition-options">
+          <article class="edition-card"><h3>Claude版</h3><p>Claude Codeの契約ログインで、段落の構成を補正します。</p><a class="button button-mint" href="downloads/__CLAUDE_ZIP__" download>Claude版をダウンロード</a><p class="download-meta">ZIP / __CLAUDE_SIZE__ · __VERSION__</p><details class="integrity"><summary>Claude版のSHA-256</summary><code>__CLAUDE_HASH__</code></details></article>
+          <article class="edition-card"><h3>Codex版</h3><p>Codex CLIのChatGPTログインで、段落の構成を補正します。</p><a class="button button-mint" href="downloads/__CODEX_ZIP__" download>Codex版をダウンロード</a><p class="download-meta">ZIP / __CODEX_SIZE__ · __VERSION__</p><details class="integrity"><summary>Codex版のSHA-256</summary><code>__CODEX_HASH__</code></details></article>
+        </div>
+      </div>
+      <div class="release-panel"><div class="release-heading"><span>両方の版に含まれるもの</span><span class="release-tag">SOURCE</span></div><ul><li>PDF翻訳・日本語版と英日交互版の出力</li><li>用語集と、表の英語に対応する本文の原語併記・注釈</li><li>PCブラウザの操作画面・初回設定・起動用bat</li><li>OCR文字層付きスキャンPDFへの対応</li><li>途中再開と終了コードによる結果の案内</li></ul><div class="requirements"><span>必要なもの</span><p>Windows 10 / 11、Python 3.11以上、日本語フォント、インターネット接続、ご自身のGemini APIキー。構造補正には選んだ版のCLIと、ご自身の契約ログインが必要です。使えない場合は理由と直し方を表示し、構造補正なしで続けるか確認します。</p></div><p class="release-footnote">画像だけのPDFにOCRを新規実行する機能はありません。日本語の重なりや翻訳内容は出力後にご確認ください。Codex版の実AI検証状況は配布情報に記録しています。</p><details class="integrity"><summary>更新内容・配布ファイル情報</summary><p>__VERSION__：共有PDF処理、表の用語対応、OCR文字層対応を収録。構造補正の担当と既定設定が異なる2つのZIPを用意しました。導入手順はZIP内のREADME.mdをご覧ください。</p><a href="downloads/__RELEASE_NAME__">両版の配布情報を開く</a></details></div>
+    </div>
+  </section>
+  <section id="guide" class="section-wrap guide-section">
+    <div class="section-heading"><div><p class="eyebrow">使い始め方</p><h2><span class="heading-line">準備は初回だけ。</span><span class="heading-line">あとは、PDFを選ぶ。</span></h2></div><p>コードZIPを解凍してから進めてください。APIキーやログイン情報を、このサイトに入力する必要はありません。</p></div>
+    <ol class="setup-steps">
+      <li><div class="step-index">01</div><div class="step-body"><h3>Pythonとライブラリを準備</h3><p><a href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener noreferrer">公式サイトからPython 3.11以上を導入</a>。解凍したフォルダの <code>setup.bat</code> をダブルクリックします。手動で導入する場合は、フォルダ内で次のコマンドを実行します。</p><div class="code-block"><code id="install-command">python -m pip install -r requirements.txt</code><button type="button" class="copy-button" data-copy="install-command" aria-label="ライブラリのインストールコマンドをコピー">コピー</button></div><p class="step-note">Pythonや依存ライブラリはZIPに同梱していません。</p></div></li>
+      <li><div class="step-index">02</div><div class="step-body"><h3>ご自身のAI利用環境を設定</h3><p><a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">Google AI StudioでAPIキーを取得</a>します。起動後の設定画面で登録できます。コマンドラインで使う場合は次のように設定し、ターミナルを開き直してください。</p><div class="code-block"><code id="key-command">setx GEMINI_API_KEY "あなたのAPIキー"</code><button type="button" class="copy-button" data-copy="key-command" aria-label="APIキー設定コマンドのひな形をコピー">コピー</button></div><p class="step-note">初回の起動時は設定画面が開きます。Pythonなどの状態を確認し、Geminiキーの登録と接続テスト、外部AIへの送信についての同意を行います。キーはお使いのPCのご自身のユーザー領域にだけ保存されます。</p><p class="step-note">構造補正を使う場合、Claude版は <a href="https://code.claude.com/docs/en/setup" target="_blank" rel="noopener noreferrer">Claude Code</a> の <code>/login</code>、Codex版は <a href="https://developers.openai.com/codex/cli" target="_blank" rel="noopener noreferrer">Codex CLI</a> の <code>codex login</code> で、ご自身の契約アカウントにログインします。利用量はご自身の契約に従います。</p></div></li>
+      <li><div class="step-index">03</div><div class="step-body"><h3>PCで操作画面を開く</h3><p><code>翻訳アプリ.bat</code> をダブルクリックすると、PCのブラウザに操作画面が開きます。PDFと出力形式を選び、「翻訳を開始」を押します。PDFを選んだだけでは始まりません。完成したPDFを画面からダウンロードし、一部の段落が失敗した場合は再添付せずに「この段落だけ再翻訳する」で再試行できます。</p><div class="drop-flow"><span class="flow-target">翻訳アプリ.bat</span><span class="flow-divider">PCのブラウザで操作</span><span class="flow-file">PDFを選択</span><span class="flow-results">日本語版PDF<br>日英交互版PDF</span></div><p class="step-note"><strong>使い方は3通りです。</strong>(1) <code>翻訳アプリ.bat</code> のブラウザ画面。(2) <code>翻訳する.bat</code> にPDFをドラッグ&amp;ドロップ (元のPDFと同じフォルダへ出力)。(3) コマンドラインで <code>python -m readable 論文.pdf</code> (<code>--out</code> で出力先、<code>--mode ja|dual|both</code> で出力形式を指定)。<code>setup.bat</code> を実行した場合は、フォルダ内の <code>.venv</code> が自動で使われます。</p><p class="step-note">処理時間はページ数・文量・APIの利用上限で変わります。</p></div></li>
+    </ol>
+    <aside class="data-note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4v5c0 5-8 9-8 9s-8-4-8-9V7zM8 12l3 3 5-6"/></svg><div><h3>利用前に、外部AIへの送信について</h3><p>PDF処理はPC上で動きますが、翻訳対象の文章などはGoogleへ、構造補正を使う場合は段落の抜粋などが、Claude版ではAnthropicへ、Codex版ではOpenAIへ送られます。無料サービスの条件では、Googleが入力・出力を製品改善等に利用する場合があります。機密情報や個人情報を含む文書は送信しないでください。</p><p>Claude版でAnthropicへ送るのは段落の抜粋 (先頭・末尾の数十文字など) です。翻訳の補助 (既定でオン) では、論文の題名・要旨、用語集、および翻訳が失敗した段落の原文も送ります。全文の校正のために全文を送ることはなく、<code>--no-assist</code> で補助だけ止められます。ClaudeのAPIキーやゲートウェイの設定 (<code>ANTHROPIC_API_KEY</code> など) を検出した場合は、API課金を避けるため構造補正をスキップし、契約ログインだけを使います。キー・ログインはすべて利用者ご自身のアカウントです。<a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener noreferrer">公式の利用条件を確認</a></p><p class="data-note-date">利用条件の確認日：2026年10月1日。最新の条件は提供元の公式情報をご確認ください。</p></div></aside>
+  </section>
+  <section id="faq" class="section-wrap faq-section"><div><p class="eyebrow">よくある質問</p><h2><span class="heading-line">使う前に、</span><span class="heading-line">知っておきたいこと。</span></h2></div><div class="faq-list">
+    <details><summary>無料で使えますか？</summary><p>Gemini APIの無料枠を利用する想定ですが、モデル・アカウントごとに適用条件や上限が変わります。Claude CodeまたはCodex CLIによる構造補正には、各サービスの対応する契約が必要です。利用量はご自身の契約に従います。<a href="https://ai.google.dev/gemini-api/docs/rate-limits" target="_blank" rel="noopener noreferrer">Geminiの利用上限を確認</a></p></details>
+    <details><summary>Claude CodeやCodexは必要ですか？</summary><p>翻訳にはGemini API、構造補正には各版のCLIを使います。Claude版はClaude Code、Codex版はCodex CLIでご自身の契約アカウントにログインしてください。画面では構造補正を必ず試み、使えない場合は理由と直し方を表示します。構造補正なしでの続行を承認した場合だけ、簡易解析で翻訳します。両版の違いは構造補正の担当で、全文の日本語校正を行う機能ではありません。</p></details>
+    <details><summary>スマートフォンでも翻訳できますか？</summary><p>翻訳ツールはWindows PC向けです。PCにPythonや必要なライブラリを導入し、PCのブラウザ画面またはbatから実行します。スマートフォンでの翻訳操作は対象外です。</p></details>
+    <details><summary>どんなPDFに対応していますか？</summary><p>文字を選択・抽出できる英語PDFと、OCR文字層付きのスキャンPDFが対象です。画像だけのPDFに文字認識を新規実行する機能はありません。スライドPDFは論文向けの前提と合わず対象外です。表の本体は英語のまま残します (用語は本文に併記)。OCR誤りや複雑なレイアウトでは、訳文・重なり・原文の残りを確認してください。パスワード付きPDFは解除が必要です。</p></details>
+    <details><summary>図や表の中の英語も翻訳されますか？</summary><p>本文、見出し、キャプションなどを翻訳します。図中の文字、表本体、数式、所属、参考文献などは既定で原文のまま残します。図表内の英語に和訳の注釈は付けません (設定 annotations = true で、見えない注釈として付けられます)。</p></details>
+    <details><summary>原文と同じ配置になりますか？</summary><p>原文の配置をできるだけ保つように調整しますが、訳文の長さにより文字サイズや段落の位置が変わります。翻訳領域内の引用など、一部の内部リンクは失われる場合があります。すべてのPDFで同じ仕上がりは保証できません。翻訳内容と出力の見た目はご確認ください。</p></details>
+    <details><summary>APIの上限や翻訳失敗はどう表示されますか？</summary><p>終了コード7は日次上限です。上限解除後に同じPDFを実行すると、保存済みの翻訳から再開します。12は一部の段落が原文のまま残った状態で、PDFは出力されます。画面の「この段落だけ再翻訳する」ボタンで、再添付せずに再試行できます。8は設定や権限、9はAPIエラーや開発用の予算上限、11は日本語フォントの不足です。再試行時にも構造補正を使えるか確認します。</p></details>
+    <details><summary>APIキーやPDFをこのサイトに送りますか？</summary><p>このサイトは紹介とコード配布のためのページです。APIキーの入力やPDFのアップロードは行いません。翻訳操作画面で選んだPDFは、ご自身のPCで起動したローカル処理へ渡されます。ダウンロードしたツールから外部AIサービスへ送信される内容は、上記の利用条件をご確認ください。</p></details>
+  </div></section>
+  <section class="section-wrap closing-section"><p>原文を確かめながら、<strong>理解を一歩ずつ。</strong></p><a class="button button-primary" href="#download">コードをダウンロード</a></section>
+</main>
+<footer><div class="section-wrap footer-inner"><a class="brand" href="#"><span class="brand-mark" aria-hidden="true">文</span><span>PDF <strong>Translate</strong></span></a><p>Windows向けPDF翻訳ツール · __VERSION__ ソース版</p><a href="downloads/START_HERE.md" download>導入ガイド</a><a href="#download">配布情報</a></div></footer>
+<dialog id="preview-dialog" aria-labelledby="dialog-title"><div class="dialog-header"><h2 id="dialog-title">PDFの表示例</h2><button type="button" id="close-dialog" aria-label="拡大表示を閉じる">閉じる <span aria-hidden="true">×</span></button></div><div class="dialog-content"><img id="dialog-image" src="assets/sample-ja.png" width="900" height="1274" alt=""></div></dialog>
+<p id="copy-status" class="sr-only" role="status" aria-live="polite"></p>
+</body>
+</html>

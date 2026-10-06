@@ -1,0 +1,1 @@
+        環境変数 GEMINI_API_KEY が設定されていません (README.md の初回セットアップを参照)。

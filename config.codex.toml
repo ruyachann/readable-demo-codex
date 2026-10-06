@@ -1,0 +1,7 @@
+# Codex版用の最小設定。その他の値はreadable/config.pyの共通既定値を使う。
+[structure]
+provider = "codex"
+
+[codex]
+model = "gpt-5.6-sol"
+timeout = 180

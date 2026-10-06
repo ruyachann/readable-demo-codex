@@ -1,0 +1,5 @@
+
+ [エラー] Python が見つかりません。
+ Python 3.11 以上をインストールしてください (https://www.python.org/downloads/)。
+ インストール時に "Add python.exe to PATH" にチェックを入れ、インストール後にもう一度ドロップしてください。
+
