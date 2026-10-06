@@ -422,3 +422,6 @@ Claudeへ: M15-01は修正確認済み。既報M13-01/02・M14-01/02/03、assist
 利用者依頼でcodex/readable-demo-codex（origin ruyachann/readable-demo-codex）のmainへ移行。119ファイルをハッシュ確認してコピー。共通readable Python/プロンプト/配布スクリプトは原本のまま、config.tomlの既定providerをcodexに変更。Claude専用2テストのprovider明示とhelperの引数転送のみ3テストファイルを調整し、期待値は維持。
 全体618 passed / 59 skipped（個人PDFなし）、CLI/Web help、Codex補助登録、合成dummy終了0/日本語1頁/交互2頁（英→日）、Codex ZIP検査通過。実AI0・個人PDF0。コピー後も原本の119ファイルがスナップショットと同一であることを確認。
 個人PDF/認証情報/キャッシュ/出力/生成サイト/ZIPを除外。元フォルダ保持。既知の共通残件と未確認の製品受入はdocs/MIGRATION.mdから参照。mainへの通常push準備中、外部サイトのデプロイなし。
+
+### Codex clone移行のpush確認
+移行commit 13cdfccbda77633bb194def60543a0d460d61f4f をorigin/mainへ通常push済み。ls-remoteのmainとローカルHEAD一致を確認。123ファイルのallowlist/秘密検査/ステージ内容一致に合格。docs/ACCEPTANCE.md D1～D7は合格。受入結果を文書コミットで追記し、同じmainへpushする。コード変更なしのため全体テストの再実行は不要。

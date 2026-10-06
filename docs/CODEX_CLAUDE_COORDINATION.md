@@ -230,3 +230,6 @@ Codex固有/既存transport/配布/Web/M14連携の173件は通過、実AI0・�
 
 ## 2026-10-06：cloneへの移行スナップショット
 このcloneは保存済み119ファイルを移行済み。共通Pythonソースは原本と同一、config.tomlのproviderはcodex。README/AGENTS/移行文書/.gitignoreのみclone向けに調整する。上のClaude M15担当記録はコピー元の履歴であり、このcloneに後続変更が自動同期されることはない。今後の担当はこのメモの末尾に記録する。
+
+### Codex専用clone移行完了
+移行commit 13cdfccbda77633bb194def60543a0d460d61f4f をorigin/mainへpushしremote一致確認済み。cloneはCodex既定、618 passed / 59 skipped、合成dummy/Codex ZIP/秘密検査通過。元の共有フォルダは保持。共通coreの残件はdocs/MIGRATION.mdと受入UPDATEに引き継ぐ。移行後のCodex開発はこのcloneで行う。

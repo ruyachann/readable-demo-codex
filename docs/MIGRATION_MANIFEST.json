@@ -197,7 +197,7 @@
       "source_sha256": "492d136e3af399a1c2b70cfa601ec5ab11e03ac2e03829b814887c8c45f4b2de",
       "clone_sha256_at_copy": "492d136e3af399a1c2b70cfa601ec5ab11e03ac2e03829b814887c8c45f4b2de",
       "adaptation": "Migration acceptance results",
-      "clone_sha256_final": "5097d5c69b8251e097fd553131de2abe38d6ec7530425ecabe9607d2fbff8149"
+      "clone_sha256_final": "796a790b10a4aa00394a007a87333cd5c767a00a206612af275515fb040316b2"
     },
     {
       "path": "docs/API.md",
@@ -232,7 +232,7 @@
       "source_sha256": "ed6faf86e4a335e328ef800ab7643de6f26f40772789bbba24a9aacf7e75f483",
       "clone_sha256_at_copy": "ed6faf86e4a335e328ef800ab7643de6f26f40772789bbba24a9aacf7e75f483",
       "adaptation": "Clone handoff and migration completion",
-      "clone_sha256_final": "0b114cca52c38d92be92d1a6270a52b6e0d38899aeff4d9e2bf1e61e88f8e1d5"
+      "clone_sha256_final": "e795f934fa5c2b3a557a0c755944891b5e1a089879b465cc71074e4deb4a99af"
     },
     {
       "path": "docs/CODEX_PLAN.md",
@@ -288,7 +288,7 @@
       "source_sha256": "2c9780548b8b0ee1f01ce4b8114805c17c255bf542c6b69e252be21b6d651f1d",
       "clone_sha256_at_copy": "2c9780548b8b0ee1f01ce4b8114805c17c255bf542c6b69e252be21b6d651f1d",
       "adaptation": "Migration verification and Git handoff",
-      "clone_sha256_final": "6d4a3621fa369552d9468c974e077764f2a2e05a5831491bddd138e4252ea28c"
+      "clone_sha256_final": "77a6fc4d44cd60f3a8559ec4af28d3526fb1f33d15c5831d2efe3954050a3bd7"
     },
     {
       "path": "docs/RESUME.md",

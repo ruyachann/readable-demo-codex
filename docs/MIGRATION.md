@@ -4,6 +4,8 @@
 リモート: https://github.com/ruyachann/readable-demo-codex.git
 ブランチ: main。移行前のリモートにはコミットなし。
 
+移行コミット `13cdfccbda77633bb194def60543a0d460d61f4f` をmainへpushし、リモートmainとの一致を確認済み。受入D1〜D7は合格。検証記録の追記は後続の文書コミットとして保存する。
+
 ## 移行範囲
 
 - 共通PDF処理とCodex provider/assist、ローカルWeb UI、プロンプト、設定、固定用語集、起動bat、依存ライブラリ一覧。

@@ -48,4 +48,4 @@
 | D4 | CLI/Web起動と合成dummy PDF | 合格 | help終了0、日本語1頁/交互2頁、英→日、日本語文字あり |
 | D5 | Codex ZIP整合性と実AI予算 | 合格 | 正規ビルダーの検証通過。Gemini/Codex要求0、個人PDF0 |
 | D6 | Gitの収録範囲・秘密情報検査 | 合格 | 123ファイルのallowlist/秘密検査通過、stageとファイルの内容一致。個人PDF・生成物なし |
-| D7 | mainへのpush・remote一致 | 確認中 | 通常push後にリモートcommitを確認する |
+| D7 | mainへのpush・remote一致 | 合格 | 初回移行commit 13cdfccbda77633bb194def60543a0d460d61f4f を通常push。ls-remoteのmainとHEAD一致を確認 |
